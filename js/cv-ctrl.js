@@ -27,51 +27,51 @@ function CvCtrl($scope) {
 
     $scope.skillsList = [
         {name: {en : 'Python'},
-         desc: {en : '',
+         desc: {en : 'Deep knowledge, used in a lot of projects.',
                 fr : 'Très bonne connaissance, utilisé dans de nombreux projets'},
          level: 4},
         {name: {en : 'Php'},
-         desc: {en : '',
+         desc: {en : 'Creation or maintenance of several websites, with or without framework',
                 fr : 'Maintenance ou création de plusieurs sites web avec ou sans framework'},
          level: 4},
         {name: {en : 'Javascript'},
-         desc: {en : '',
+         desc: {en : 'Used to dynamize several websites, including this CV',
                 fr : 'Utilisation pour dynamiser plusieurs sites web dont ce CV'},
          level: 3},
         {name: {en : 'SQL'},
-         desc: {en : '',
+         desc: {en : 'Lot of projets using Mysql or SQlite',
                 fr : 'Nombreux projets utilisants Mysql ou SQlite'},
          level: 2},
         {name: {en : 'C'},
-         desc: {en : '',
+         desc: {en : 'Studied in class, a fex personal projets, patches for GTK+',
                 fr : 'Étudié en cours, quelques projets personnels, développement de patchs pour Gtk+'},
          level: 2},
         {name: {en : 'Arduino'},
-         desc: {en : '',
+         desc: {en : 'Several projects using Arduino libraries, bare metal programming on a Atmel AVR microcontroller',
                 fr : 'Plusieurs projet en C-Arduino, programmation directe d\'un µC AVR-Atmel'},
          level: 3},
         {name: {en : 'Java'},
-         desc: {en : '',
+         desc: {en : 'Surface knowledge, used for Android applications.',
                 fr : 'Connaissance superficielle, utilisé pour des projets Android'},
          level: 1},
         {name: {en : 'Lisp'},
-         desc: {en : '',
+         desc: {en : 'Studied in class (6 months), used in Emacs',
                 fr : 'Étudié en cours (6 mois), utilisation dans Emacs'},
          level: 2},
         {name: {en : 'VHDL, Asm IA32'},
-         desc: {en : '',
+         desc: {en : 'Studied in class (6 months)',
                 fr : 'Étudié en cours (6 mois)'},
          level: 1},
         {name: {en : 'Scilab'},
-         desc: {en : '',
+         desc: {en : 'Numerical analysis class (6 motnhs)',
                 fr : 'Cours d\'analyse numérique (6 mois)'},
          level: 2},
         {name: {en : 'Linux'},
-         desc: {en : '',
+         desc: {en : 'Daily use since 2008, administration of an ARM Server to play music (MPD) and hosting websites (Nginx, Apache, Tornado, Mysql)',
                 fr : 'Utilisation quotidienne depuis 2008, administration d\'un serveur ARM pour la diffusion de musique (MPD) et l\'hébergement de sites web (Nginx, Apache, Tornado, Mysql)'},
          level: 4},
         {name: {en : 'Git'},
-         desc: {en : '',
+         desc: {en : 'Daily use since 2010',
                 fr : 'Utilisation quotidienne depuis 2010'},
          level: 4},];
 
@@ -95,7 +95,13 @@ function CvCtrl($scope) {
     $scope.experiencesList = [
         {name: {en : 'Since 2012',
                 fr : 'Depuis 2012'},
-         desc: {en : '',
+         desc: {en : '<b>Student association \'Le Polar\'</b><br/>'+
+                'Information systems management, treasury then chiefship<br/>'+
+                'Main IT Projects:<br/><ul>'+
+                '  <li>Internal website developement</li>'+
+                '  <li>Online reading of older examination subject with collaborative correction system</li>'+
+                '  <li>Tickets printing, with barcodes</li>'+
+                '</ul>',
                 fr : '<b>Association étudiante Le Polar</b><br/>'+
                 'Gestion du système informatique, Trésorerie puis Présidence<br/>'+
                 'Projets informatiques :'+
@@ -106,11 +112,11 @@ function CvCtrl($scope) {
                 '  <li>Vérification d\'entrée à un évènement par smartphone Android</li>'+
 '</ul>'}},
         {name: {en : '2013'},
-         desc: {en : '',
+         desc: {en : '<b>Creation of an online treasury management system for student associations</b><br/>Project leader - Web developer (Php, symfony)',
                 fr : '<b>Création d\'un système de trésorerie en ligne pour les associations de l\'UTC</b><br/>Chef de projet - développeur Web (Php - symfony)'}},
         {name: {en : '2012 - 2013',
                 fr : '2012 à 2013'},
-         desc: {en : '',
+         desc: {en : '<b>Webmaster for the scientific communication service my university</b><br/>Maintenance then full rewrite of the website',
                 fr : '<b>Webmestre de la Fête de la science à l\'UTC</b><br/>Maintenance puis réécriture complète du site'}},];
 
     $scope.title = {en : 'Computer Science Student', fr : 'Étudiant Ingénieur en informatique'};
