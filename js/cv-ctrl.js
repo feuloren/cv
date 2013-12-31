@@ -120,6 +120,9 @@ function CvCtrl($scope) {
     $scope.skills = {en : 'Skills', fr : 'Compétences'};
     $scope.languages = {en : 'Languages', fr : 'Langues'};
 
+    $scope.objective = {en : 'Doing the UTC mid-term internishp', fr : 'Effectuer le stage d\'assistant ingénieur UTC'};
+    $scope.objectiveTitle = {en : 'Objective : ', fr : 'Objectif : '};
+
     $scope.availableLanguages = [
         {code : 'en', name : 'English'},
         {code : 'fr', name : 'Français'}];
