@@ -1,9 +1,28 @@
 .list-unstyled li {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 .panel {
     margin-top: 10px;
     margin-bottom: 0px;
+}
+
+/*.container {
+    width: 720px !important;
+}*/
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+.list-inline li {
+    margin-top: 5px !important;
+}
+
+h2 label {
+    font-weight: normal;
+    font-size: 14px;
 }

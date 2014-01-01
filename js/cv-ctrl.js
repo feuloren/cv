@@ -78,32 +78,38 @@ function CvCtrl($scope) {
     $scope.schoolsList = [
         {name: {en : 'Since September 2013',
                 fr : 'Depuis Septembre 2013'},
-         desc: {en : '<b>Université de Technologie de Compiègne (France) - Computer Science</b><br/>Computer Science, Mathematics, Humanities',
-                fr : '<b>UTC - Génie Informatique</b><br/>Informatique, Mathématique, Sciences Humaines'},
+         title: {en : 'Université de Technologie de Compiègne (France) - Computer Science',
+                 fr : 'UTC - Génie Informatique'},
+         desc: {en : 'Computer Science, Mathematics, Humanities',
+                fr : 'Informatique, Mathématique, Sciences Humaines'},
          level: 1},
         {name: {en : '2011 - 2013',
                 fr : '2011 à 2013'},
-         desc: {en : '<b>UTC - Common Core</b><br/>Mecanics, Mathematics, Computer Science, Humanities',
-                fr : '<b>UTC - Tronc Commun</b><br/>Mécanique, Mathématique, Informatique, Sciences Humaines'},
+         title: {en : 'UTC - Common Core',
+                 fr : 'UTC - Tronc Commun'},
+         desc: {en : 'Mecanics, Mathematics, Computer Science, Humanities',
+                fr : 'Mécanique, Mathématique, Informatique, Sciences Humaines'},
          level: 1},
         {name: {en : '2008 - 2011',
                 fr : '2008 à 2011'},
-         desc: {en : '<b>High School - France</b><br/>French Baccalauréat with honors - Science Stream<br/>Special Spanish section',
-                fr : '<b>Lycée Émilie de Breteuil</b><br/>Série S - Sciences de l\'ingénieur<br/>Classe européenne Espagnol<br/>Bac Mention Très Bien'},
+         title: {en : 'High School - France',
+                 fr : 'Lycée Émilie de Breteuil'},
+         desc: {en : 'French Baccalauréat with honors - Science Stream<br/>Special Spanish section',
+                fr : 'Série S - Sciences de l\'ingénieur<br/>Classe européenne Espagnol<br/>Bac Mention Très Bien'},
          level: 1},];
 
     $scope.experiencesList = [
         {name: {en : 'Since 2012',
                 fr : 'Depuis 2012'},
-         desc: {en : '<b>Student association \'Le Polar\'</b><br/>'+
-                'Information systems management, treasury then chiefship<br/>'+
+         title: {en : 'Student association \'Le Polar\'',
+                 fr : 'Association étudiante Le Polar'},
+         desc: {en : 'Information systems management, treasury then chiefship<br/>'+
                 'Main IT Projects:<br/><ul>'+
                 '  <li>Internal website developement</li>'+
                 '  <li>Online reading of older examination subject with collaborative correction system</li>'+
                 '  <li>Tickets printing, with barcodes</li>'+
                 '</ul>',
-                fr : '<b>Association étudiante Le Polar</b><br/>'+
-                'Gestion du système informatique, Trésorerie puis Présidence<br/>'+
+                fr : 'Gestion du système informatique, Trésorerie puis Présidence<br/>'+
                 'Projets informatiques :'+
                 '<ul>'+
                 '  <li>Développement du site web interne de l\'association</li>'+
@@ -112,19 +118,25 @@ function CvCtrl($scope) {
                 '  <li>Vérification d\'entrée à un évènement par smartphone Android</li>'+
 '</ul>'}},
         {name: {en : '2013'},
-         desc: {en : '<b>Creation of an online treasury management system for student associations</b><br/>Project leader - Web developer (Php, symfony)',
-                fr : '<b>Création d\'un système de trésorerie en ligne pour les associations de l\'UTC</b><br/>Chef de projet - développeur Web (Php - symfony)'}},
+         title: {en : 'Creation of an online treasury management system for student associations',
+                 fr : 'Création d\'un système de trésorerie en ligne pour les associations de l\'UTC'},
+         desc: {en : 'Project leader - Web developer (Php, symfony)',
+                fr : 'Chef de projet - développeur Web (Php - symfony)'}},
         {name: {en : '2012 - 2013',
                 fr : '2012 à 2013'},
-         desc: {en : '<b>Webmaster for the scientific communication service my university</b><br/>Maintenance then full rewrite of the website',
-                fr : '<b>Webmestre de la Fête de la science à l\'UTC</b><br/>Maintenance puis réécriture complète du site'}},];
+         title: {en : 'Webmaster for the scientific communication service my university',
+                 fr : 'Webmestre de la Fête de la science à l\'UTC'},
+         desc: {en : 'Maintenance then full rewrite of the website',
+                fr : 'Maintenance puis réécriture complète du site'}},];
 
     $scope.title = {en : 'Computer Science Student', fr : 'Étudiant Ingénieur en informatique'};
-    $scope.subtitle = {en : 'Systems & Networks', fr : 'Systèmes et Réseaux'};
+    $scope.subtitle = {en : 'Systems & Computer Networks', fr : 'Systèmes et Réseaux'};
     $scope.experience = {en : 'Experience', fr : 'Expérience'};
     $scope.education = {en : 'Education', fr : 'Formation'};
     $scope.skills = {en : 'Skills', fr : 'Compétences'};
     $scope.languages = {en : 'Languages', fr : 'Langues'};
+
+    $scope.expanderText = {en : 'Expand', fr : 'Développer'};
 
     $scope.objective = {en : 'Doing the UTC mid-term internishp', fr : 'Effectuer le stage d\'assistant ingénieur UTC'};
     $scope.objectiveTitle = {en : 'Objective : ', fr : 'Objectif : '};
@@ -133,6 +145,9 @@ function CvCtrl($scope) {
         {code : 'en', name : 'English'},
         {code : 'fr', name : 'Français'}];
     $scope.pageLanguage = $scope.availableLanguages[1];
+
+    $scope.expandSkills = false;
+    $scope.expandExps = false;
 }
 
 cvApp.directive('cvItem', function () {
@@ -140,9 +155,10 @@ cvApp.directive('cvItem', function () {
         restrict:'E',
         replace:true,
         template:'<ul class="list-unstyled"></ul>',
-        scope: {items : '=', language : '='},
+        scope: {items : '=', language : '=', expand : '=?'},
         link:function (scope, element, attrs, ctrl) {
-            scope.$watch('language', function(language, old) {
+
+            var recalculate = function() {
                 element.html('');
                 angular.forEach(scope.items, function(item) {
                     // on détermine le label à partir de level
@@ -160,17 +176,37 @@ cvApp.directive('cvItem', function () {
                     }
 
                     // puis les attributs en fonction de la langue
-                    var name = item.name[language.code];
-                    if (name == undefined)
-                        name = item.name['en'];
-                    
-                    var desc = item.desc[language.code];
-                    if (desc == undefined)
-                        desc = item.desc['en'];
-                    
-                    var li = '<li><span class="label '+label_class+'">'+name+'</span> '+desc+'</li>';
+                    var name = item.name[scope.language.code] || item.name['en'];
+                    var desc = item.desc[scope.language.code] || item.desc['en'];
+
+                    var span = '<span class="label '+label_class+'">'+name+'</span>';
+                    if (item.title != undefined) {
+                        var title = item.title[scope.language.code] || item.title['en'];
+                        span += ' <b>'+ title +'</b><br/>';
+                    }
+
+                    // si expand est vrai ou non défini on affiche la description
+                    if (scope.expand == true || scope.expand == undefined) {
+                        var li = '<li>'+span+' '+desc+'</li>';
+                        element.attr('class', 'list-unstyled');
+                    } else {
+                        var li = '<li>'+span+'</li>';
+
+                        // on transforme la liste en inline à moins qu'il y ait un titre
+                        if (item.title == undefined)
+                            element.attr('class', 'list-inline');
+                        else
+                            element.attr('class', 'list-unstyled');
+                    }
                     element.append(li);
                 });
+            }
+
+            scope.$watch('language', function(newl, old) {
+                recalculate();
+            });
+            scope.$watch('expand', function(newe, old) {
+                recalculate();
             });
         }
     }
@@ -190,5 +226,13 @@ cvApp.directive('cvText', function () {
                 element.html(text);
             });
         }
+    }
+});
+
+cvApp.directive('cvExpander', function () {
+    return {
+        restrict:'E',
+        template : '<input id="{{id}}" type="checkbox" ng-model="item"/> <label for="{{id}}" cv-text="text" language="language"></label>',
+        scope: {item : '=', language : '=', text: '=', id: '@item'}
     }
 });
